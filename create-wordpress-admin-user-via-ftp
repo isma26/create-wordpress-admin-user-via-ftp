@@ -1,0 +1,19 @@
+Open the FTP client and connect to your account.
+Navigate to wp-content/themes
+Open the folder of the theme that is currently in use.
+Look for the functions.php file and edit it.
+Copy the following function and paste it into the file.
+
+
+function create_admin_account(){
+$user = 'Username'; //your username here
+$pass = 'Password'; //your password here
+$email = 'email@domain.com';
+//if a username with the email ID does not exist, create a new user account
+if ( !username_exists( $user ) && !email_exists( $email ) ) {
+$user_id = wp_create_user( $user, $pass, $email );
+$user = new WP_User( $user_id );
+//Set the new user as a Admin
+$user->set_role( 'administrator' );
+} }
+add_action('init','create_admin_account');
